@@ -20,10 +20,12 @@ def login():
     name = request.form.get("user-name")
     email = request.form.get("user-email")
     password = request.form.get("user-password")
-    #neues Objekt User(Model)
-    user = User(name=name, email=email, password=password)
-    db.add(user)
-    db.commit()
+    #neues Objekt User(Model
+    user = db.query(User).filter_by(email=email).first
+    if not user:
+        user = User(name=name, email=email, password=password)
+        db.add(user)
+        db.commit()
     #cookie
     response = make_response(redirect(url_for('index')))
     response.set_cookie("email", email)
