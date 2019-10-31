@@ -19,8 +19,9 @@ def index():
 def login():
     name = request.form.get("user-name")
     email = request.form.get("user-email")
+    password = request.form.get("user-password")
     #neues Objekt User(Model)
-    user = User(name=name, email=email)
+    user = User(name=name, email=email, password=password)
     db.add(user)
     db.commit()
     #cookie
